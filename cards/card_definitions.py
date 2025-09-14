@@ -4,7 +4,7 @@ This module maps each CardColor to a list of (CardKind, Ability) tuples,
 where Ability is an instance of a card action class.
 """
 
-from cards import (
+from cards.cards import (
     CardColor,
     CardKind,
     Cover,
@@ -29,7 +29,7 @@ CARD_DEFINITIONS = {
         (CardKind.DRAGON, SwitchCard()),
         (CardKind.ZOMBIE, ExtraCard()),
         (CardKind.FROG, RemoveKind(CardKind.UNICORN)),
-        (CardKind.UNICORN, RemoveColor(CardColor.ORANGE)),
+        (CardKind.UNICORN, RemoveColor(CardColor.YELLOW)),
         (CardKind.CAT, Cover()),
     ],
     CardColor.GREEN: [
@@ -40,7 +40,7 @@ CARD_DEFINITIONS = {
         (CardKind.UNICORN, Donate()),
         (CardKind.CAT, SwitchCard()),
     ],
-    CardColor.ORANGE: [
+    CardColor.YELLOW: [
         (CardKind.DUCK, SwitchCard()),
         (CardKind.DRAGON, ExtraCard()),
         (CardKind.ZOMBIE, RemoveKind(CardKind.FROG)),

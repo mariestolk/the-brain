@@ -8,10 +8,26 @@ class CardColor(Enum):
 
     BLUE = 1
     GRAY = 2
-    ORANGE = 3
+    YELLOW = 3
     PURPLE = 4
     RED = 5
     GREEN = 6
+
+    def ansi_code(self) -> str:
+        """Return the ANSI color code for pretty-printing the color."""
+        mapping = {
+            CardColor.BLUE: "\033[94m",
+            CardColor.GRAY: "\033[90m",
+            CardColor.YELLOW: "\033[33m",
+            CardColor.PURPLE: "\033[95m",
+            CardColor.RED: "\033[91m",
+            CardColor.GREEN: "\033[92m",
+        }
+        return mapping[self]
+
+    def __str__(self) -> str:
+        """Pretty-print the color with ANSI code."""
+        return f"{self.ansi_code()}{self.name.title()}\033[0m"
 
 
 class CardKind(Enum):
@@ -28,7 +44,9 @@ class CardKind(Enum):
 class CardEffect:
     """Base class for all card effects in the game."""
 
-    pass
+    def __str__(self) -> str:
+        """Return the name of the effect class."""
+        return self.__class__.__name__
 
 
 class Cover(CardEffect):
@@ -96,3 +114,13 @@ class Card:
         self.color = color
         self.kind = kind
         self.effect = effect
+
+    def __str__(self) -> str:
+        """Return a string representation of the card."""
+        if isinstance(self.effect, RemoveKind):
+            effect_str = f"RemoveKind({self.effect.target_kind.name})"
+        elif isinstance(self.effect, RemoveColor):
+            effect_str = f"RemoveColor({self.effect.target_color.name})"
+        else:
+            effect_str = str(self.effect)
+        return f"{self.color} {self.kind.name.title()} [{effect_str}]"

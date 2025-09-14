@@ -10,7 +10,7 @@ class Zone:
     ----------
     name : str
         The name of the zone.
-    cards : list[Card]
+    cards : List[Card]
         The list of cards in the zone.
 
     """
@@ -22,6 +22,13 @@ class Zone:
         ----------
         name : str
             The name of the zone.
+
+        Attributes
+        ----------
+        name : str
+            The name of the zone.
+        cards : List[Card]
+            The list of cards in the zone.
 
         """
         self.name = name
@@ -96,3 +103,26 @@ class PlayerHand(Zone):
 
         """
         super().__init__(f"{player_name}'s Hand")
+
+    def __iter__(self):
+        """Allow iteration over the cards in the zone."""
+        return iter(self.cards)
+
+    def pop(self) -> Card:
+        """Remove and return the last card from the zone.
+
+        Returns
+        -------
+        Card
+            The last card in the zone.
+
+        Raises
+        ------
+        IndexError
+            If the zone is empty.
+
+        """
+        if not self.cards:
+            raise IndexError("Cannot pop from an empty zone.")
+        return self.cards.pop()
+

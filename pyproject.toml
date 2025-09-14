@@ -13,7 +13,7 @@ dev = [
 ]
 
 [tool.ruff]
-line-length = 88
+line-length = 120
 extend-exclude = ["venv", ".venv", "build", "dist"]
 
 [tool.ruff.lint]
