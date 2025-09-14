@@ -8,6 +8,7 @@ dependencies = []
 
 [dependency-groups]
 dev = [
+    "python-semantic-release>=10.4.1, <11.0.0",
     "ruff>=0.13.0,<0.14.0",
 ]
 
@@ -22,3 +23,9 @@ ignore = ["D203", "D213"]
 [tool.ruff.lint.isort]
 known-first-party = ["the_brain"]
 combine-as-imports = true
+
+[tool.semantic_release]
+version_variable = "pyproject.toml:version"
+upload_to_pypi = false  # or true if you want publishing
+commit_author = "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+
