@@ -3,38 +3,31 @@
 Include CardColor, CardKind, CardEffect, Card, Player, and Game.
 """
 
-from enum import Enum
+from itertools import product
+
+from card_definitions import CardColor, CardKind, CardEffect
 
 
-class CardColor(Enum):
-    """Enumeration of possible card colors in the game."""
+class CardDeck:
+    """Represents a deck of cards in the game.
 
-    BLUE = 1
-    GRAY = 2
-    ORANGE = 3
-    PURPLE = 4
-    RED = 5
-    GREEN = 6
+    Attributes:
+        cards (list): The list of cards in the deck.
 
-class CardKind(Enum):
-    """Enumeration of possible card kinds in the game."""
+    """
 
-    DUCK = 1
-    DRAGON = 2
-    ZOMBIE = 3
-    FROG = 4
-    UNICORN = 5
-    CAT = 6
+    def __init__(self):
+        """Initialize an empty card deck."""
+        self.cards = []
 
-class CardEffect(Enum):
-    """Enumeration of possible card effects in the game."""
+        for color, kind, effect in product(CardColor, CardKind, CardEffect):
+            self.cards.append(Card(color, kind, effect))
 
-    COVER = 1
-    DONATE = 2
-    EXTRA_CARD = 3
-    TAKE_BACK = 4
-    REMOVE_KIND = 5
-    REMOVE_COLOR = 6
+    def print_deck(self):
+        """Print the details of each card in the deck."""
+        for card in self.cards:
+            print(f"Color: {card.color}, Kind: {card.kind}, Effect: {card.effect}")
+
 
 class Card:
     """Represents a card in the game with a color, kind, and effect."""
@@ -82,4 +75,5 @@ def start():
     """Start the game and print a message indicating the game has started."""
     print("Game started")
 
-start()
+card_deck = CardDeck()
+card_deck.print_deck()
