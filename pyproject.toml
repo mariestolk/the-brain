@@ -1,0 +1,24 @@
+[project]
+name = "the-brain"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11.5"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "ruff>=0.13.0,<0.14.0",
+]
+
+[tool.ruff]
+line-length = 88
+extend-exclude = ["venv", ".venv", "build", "dist"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "B", "I", "D", "COM"]
+ignore = ["D203", "D213"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["the_brain"]
+combine-as-imports = true
