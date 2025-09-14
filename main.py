@@ -5,7 +5,7 @@ Include CardColor, CardKind, CardEffect, Card, Player, and Game.
 
 from itertools import product
 
-from card_definitions import CardColor, CardKind, CardEffect
+from card_definitions import CardColor, CardEffect, CardKind
 
 
 class CardDeck:
@@ -45,6 +45,7 @@ class Card:
         self.kind = kind
         self.effect = effect
 
+
 class player:
     """Represents a player in the game.
 
@@ -59,6 +60,7 @@ class player:
         self.name = name
         self.hand = []
 
+
 class game:
     """Represents the game logic and manages the players."""
 
@@ -71,9 +73,11 @@ class game:
         """
         self.players = players
 
+
 def start():
     """Start the game and print a message indicating the game has started."""
     print("Game started")
+
 
 card_deck = CardDeck()
 card_deck.print_deck()
