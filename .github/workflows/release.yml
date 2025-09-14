@@ -8,10 +8,16 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:           
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
-            fetch-depth: 0
+          fetch-depth: 0   
+          ref: main        
       - uses: astral-sh/setup-uv@v2
       - run: uv sync
-      - run: uv run semantic-release version
+      - name: Run semantic-release
+        run: uv run semantic-release version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
