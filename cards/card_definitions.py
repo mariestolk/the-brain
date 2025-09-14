@@ -1,61 +1,19 @@
-"""Definitions for card colors, kinds, and effects used in the game."""
+"""Defines the card abilities for each card color and kind in the game.
 
-from enum import Enum
+This module maps each CardColor to a list of (CardKind, Ability) tuples,
+where Ability is an instance of a card action class.
+"""
 
-
-class CardColor(Enum):
-    """Enumeration of possible card colors in the game."""
-
-    BLUE = 1
-    GRAY = 2
-    ORANGE = 3
-    PURPLE = 4
-    RED = 5
-    GREEN = 6
-
-
-class CardKind(Enum):
-    """Enumeration of possible card kinds in the game."""
-
-    DUCK = 1
-    DRAGON = 2
-    ZOMBIE = 3
-    FROG = 4
-    UNICORN = 5
-    CAT = 6
-
-
-class CardEffect:
-    """Base class for all card effects in the game."""
-
-    pass
-
-
-class Cover(CardEffect):
-    pass
-
-
-class Donate(CardEffect):
-    pass
-
-
-class ExtraCard(CardEffect):
-    pass
-
-
-class TakeBack(CardEffect):
-    pass
-
-
-class RemoveKind(CardEffect):
-    def __init__(self, target_kind):
-        self.target_kind = target_kind
-
-
-class RemoveColor(CardEffect):
-    def __init__(self, target_color):
-        self.target_color = target_color
-
+from cards import (
+    CardColor,
+    CardKind,
+    Cover,
+    Donate,
+    ExtraCard,
+    RemoveColor,
+    RemoveKind,
+    SwitchCard,
+)
 
 CARD_DEFINITIONS = {
     CardColor.RED: [
@@ -63,12 +21,12 @@ CARD_DEFINITIONS = {
         (CardKind.DRAGON, RemoveColor(CardColor.GRAY)),
         (CardKind.ZOMBIE, Cover()),
         (CardKind.FROG, Donate()),
-        (CardKind.UNICORN, TakeBack()),
+        (CardKind.UNICORN, SwitchCard()),
         (CardKind.CAT, ExtraCard()),
     ],
     CardColor.BLUE: [
         (CardKind.DUCK, Donate()),
-        (CardKind.DRAGON, TakeBack()),
+        (CardKind.DRAGON, SwitchCard()),
         (CardKind.ZOMBIE, ExtraCard()),
         (CardKind.FROG, RemoveKind(CardKind.UNICORN)),
         (CardKind.UNICORN, RemoveColor(CardColor.ORANGE)),
@@ -80,10 +38,10 @@ CARD_DEFINITIONS = {
         (CardKind.ZOMBIE, RemoveColor(CardColor.RED)),
         (CardKind.FROG, Cover()),
         (CardKind.UNICORN, Donate()),
-        (CardKind.CAT, TakeBack()),
+        (CardKind.CAT, SwitchCard()),
     ],
     CardColor.ORANGE: [
-        (CardKind.DUCK, TakeBack()),
+        (CardKind.DUCK, SwitchCard()),
         (CardKind.DRAGON, ExtraCard()),
         (CardKind.ZOMBIE, RemoveKind(CardKind.FROG)),
         (CardKind.FROG, RemoveColor(CardColor.GREEN)),
@@ -93,7 +51,7 @@ CARD_DEFINITIONS = {
     CardColor.PURPLE: [
         (CardKind.DUCK, Cover()),
         (CardKind.DRAGON, Donate()),
-        (CardKind.ZOMBIE, TakeBack()),
+        (CardKind.ZOMBIE, SwitchCard()),
         (CardKind.FROG, ExtraCard()),
         (CardKind.UNICORN, RemoveKind(CardKind.CAT)),
         (CardKind.CAT, RemoveColor(CardColor.BLUE)),
@@ -102,7 +60,7 @@ CARD_DEFINITIONS = {
         (CardKind.DUCK, RemoveColor(CardColor.PURPLE)),
         (CardKind.DRAGON, Cover()),
         (CardKind.ZOMBIE, Donate()),
-        (CardKind.FROG, TakeBack()),
+        (CardKind.FROG, SwitchCard()),
         (CardKind.UNICORN, ExtraCard()),
         (CardKind.CAT, RemoveKind(CardKind.DUCK)),
     ],
