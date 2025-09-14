@@ -28,4 +28,5 @@ combine-as-imports = true
 version_variable = "pyproject.toml:version"
 upload_to_pypi = false  
 commit_author = "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-
+version_variable = "pyproject.toml:version"
+tag_format = "{version}"
