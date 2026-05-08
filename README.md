@@ -1,0 +1,1 @@
+This project is a work-in-progress Python implementation of The Brain, a cooperative card-based puzzle game where players work together to clear all cards without communicating. The goal is to model the core game mechanics, including player turns, card logic, and win/loss conditions.
